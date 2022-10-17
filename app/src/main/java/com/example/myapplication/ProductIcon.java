@@ -9,6 +9,8 @@ public class ProductIcon {
             p_id = R.raw.onion;
         else if(name.contains("고기"))
             p_id = R.raw.meat;
+        else if(name.contains("콜라"))
+            p_id = R.raw.coke;
         else if(name.contains("김치"))
             p_id = R.raw.kimchi;
         else if(name.contains("마늘"))
@@ -21,7 +23,7 @@ public class ProductIcon {
             p_id = R.raw.butter;
         else if(name.contains("식빵"))
             p_id = R.raw.bread;
-        else if(name.contains("식용유"))
+        else if(name.contains("식용유") || name.contains("요리유"))
             p_id = R.raw.cooking_oil;
         else if(name.contains("삼다수") || name.contains("물"))
             p_id = R.raw.water;

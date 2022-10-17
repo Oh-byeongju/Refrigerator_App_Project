@@ -47,8 +47,6 @@ public class FragmentInfo2 extends Fragment {
      @Override
      public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-        count = 1;
-        storage = "냉장";
 
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         // 프래그먼트에 findViewByld 적용위해 View 선언

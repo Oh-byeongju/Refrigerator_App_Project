@@ -73,16 +73,18 @@
             android:layout_height="45dp"
             android:gravity="center"
             android:background="@drawable/border_round2"
-            android:text="냉장고 속 재료가 사용된 "
+            android:text="냉장고 재료로 만들 수 있는 "
             android:fontFamily="@font/rose"
+
             android:textColor="@color/black"
             android:textSize="30dp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:gravity="center_horizontal"
-            android:text="레시피 추천"
+            android:gravity="center"
+            android:text="   레시피 추천"
+            android:paddingEnd="30dp"
             android:fontFamily="@font/rose"
             android:background="@color/white"
             android:textColor="@color/black"

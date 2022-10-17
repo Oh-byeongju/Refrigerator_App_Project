@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:textColor="@color/blue"
-        android:fontFamily="@font/rose"
+        android:fontFamily="@font/mini"
         android:textStyle="bold"
         android:text="이름"
         android:textSize="20dp" />

@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,7 +15,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RecipeActivity extends AppCompatActivity {
@@ -22,6 +29,15 @@ public class RecipeActivity extends AppCompatActivity {
     TextView tv_nr;
     EditText editText;
 
+    // 데이터 통신
+    static ArrayList<String> item = new ArrayList<String>();
+    static String tmp;
+
+    private Socket socket;
+    private DataOutputStream dos;
+    private DataInputStream dis;
+    private static final String ip = "112.162.2.95";
+    private static final int port = 58000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +48,8 @@ public class RecipeActivity extends AppCompatActivity {
         tv_nr = (TextView) findViewById(R.id.tv_nr);
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        ArrayList<String> item = new ArrayList<String>();
-        ArrayList<String> f_name = new ArrayList<String>();
+        // ArrayList<String> item = new ArrayList<String>();
+
         String ps;
         DatabaseHelper db = new DatabaseHelper(this);
         Cursor res = db.p_select();
@@ -41,8 +57,12 @@ public class RecipeActivity extends AppCompatActivity {
         while(res.moveToNext()){
             item.add(res.getString(1));
         }
-        Recommend_recipe rr = new Recommend_recipe();
-        f_name = rr.Return_recipe(item);
+
+        ClientThread thread = new ClientThread();
+        thread.start();
+        String[] strArr = tmp.split("#");
+        ArrayList<String> f_name = new ArrayList<String>(Arrays.asList(strArr));
+
         if(f_name.size() == 0)
             tv_nr.setVisibility(View.VISIBLE);
         // 어댑터 안에 데이터 담기
@@ -92,6 +112,45 @@ public class RecipeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    class ClientThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                Log.d("connect", "연결 시도 중");
+                Socket socket = new Socket();  // 소켓 객체 생성
+                socket.connect(new InetSocketAddress(ip, port));
+                Log.d("success", "연결 완료");
+
+                dis = new DataInputStream(socket.getInputStream());
+                dos = new DataOutputStream(socket.getOutputStream());
+
+                if(item != null){
+                    StringBuilder sb = new StringBuilder();
+                    for (String val : item){
+                        sb.append(val).append(" ");
+                    }
+
+                    String str = sb.toString();
+
+                    dos.writeUTF(str);
+                    dos.flush();
+                    Log.w("ClientThread", "서버로 보냄");
+
+                    tmp = dis.readUTF();
+                    System.out.println("[데이터 받기 성공]: " + tmp);
+                }
+
+                dis.close();
+                dos.close();
+                socket.close();
+
+            }catch (IOException e1){
+                Log.w("fail", "서버 접속 실패");
+            }
+
+        }
     }
 
 
