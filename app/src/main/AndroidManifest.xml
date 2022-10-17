@@ -22,6 +22,9 @@
             android:name=".UpdateInfo"
             android:exported="false" />
         <activity
+            android:name=".JoinActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecipeActivity2"
             android:exported="false" />
         <activity

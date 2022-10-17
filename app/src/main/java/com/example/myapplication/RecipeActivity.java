@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RecipeActivity extends AppCompatActivity {
     RecipeAdapter adapter;
@@ -36,7 +39,7 @@ public class RecipeActivity extends AppCompatActivity {
     private Socket socket;
     private DataOutputStream dos;
     private DataInputStream dis;
-    private static final String ip = "112.162.2.95";
+    private static final String ip = "192.168.35.55";
     private static final int port = 58000;
 
     @Override
@@ -48,7 +51,8 @@ public class RecipeActivity extends AppCompatActivity {
         tv_nr = (TextView) findViewById(R.id.tv_nr);
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        // ArrayList<String> item = new ArrayList<String>();
+        // 아이템 clear 안해주면 안에 값이 중첩돼서 파이썬으로 날라감
+        item.clear();
 
         String ps;
         DatabaseHelper db = new DatabaseHelper(this);
@@ -60,26 +64,24 @@ public class RecipeActivity extends AppCompatActivity {
 
         ClientThread thread = new ClientThread();
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String[] strArr = tmp.split("#");
         ArrayList<String> f_name = new ArrayList<String>(Arrays.asList(strArr));
 
         if(f_name.size() == 0)
             tv_nr.setVisibility(View.VISIBLE);
+
         // 어댑터 안에 데이터 담기
         RecipeAdapter adapter = new RecipeAdapter();
 
         for(int i=0;i<f_name.size();i++){
             adapter.addItem(new RecipeItem(f_name.get(i)));
         }
-
-        // 여기에 데이터 개수 받아서 처리
-        // 0개면 이거 ?
-        //adapter.addItem(new RecipeItem(" ", "추천드릴 레시피가 없습니다. ", R.drawable.blank ));
-        //1개이상이면 여기서  한줄씩 추가
-        //adapter.addItem(new RecipeItem("김치찌개", "설명 ~~~~", R.drawable.android1));
-        //adapter.addItem(new RecipeItem("된장찌개", "설명 ~~~~", R.drawable.android2));
-        //adapter.addItem(new RecipeItem("두루치기", "설명 ~~~~", R.drawable.android3));
-
 
         // 리스트 뷰에 어댑터 설정
         listView.setAdapter(adapter);
@@ -127,21 +129,26 @@ public class RecipeActivity extends AppCompatActivity {
                 dos = new DataOutputStream(socket.getOutputStream());
 
                 if(item != null){
+                    Set<String> temp_item = new HashSet<>(item);
+                    List<String> res_item = new ArrayList<>(temp_item);
+
                     StringBuilder sb = new StringBuilder();
-                    for (String val : item){
+                    sb.append(3);
+
+                    for (String val : res_item){
                         sb.append(val).append(" ");
                     }
 
                     String str = sb.toString();
+                    System.out.println(str);
 
                     dos.writeUTF(str);
                     dos.flush();
                     Log.w("ClientThread", "서버로 보냄");
 
                     tmp = dis.readUTF();
-                    System.out.println("[데이터 받기 성공]: " + tmp);
+                    System.out.println(tmp);
                 }
-
                 dis.close();
                 dos.close();
                 socket.close();
@@ -149,56 +156,52 @@ public class RecipeActivity extends AppCompatActivity {
             }catch (IOException e1){
                 Log.w("fail", "서버 접속 실패");
             }
-
         }
     }
 
 
-        class RecipeAdapter extends BaseAdapter {
-            ArrayList<RecipeItem> items = new ArrayList<RecipeItem>();
+    class RecipeAdapter extends BaseAdapter {
+        ArrayList<RecipeItem> items = new ArrayList<RecipeItem>();
 
 
-            // Generate > implement methods
-            @Override
-            public int getCount() {
-                return items.size();
+        // Generate > implement methods
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(RecipeItem item) {
+            items.add(item);
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // 뷰 객체 재사용
+            RecipeIteamView view = null;
+            if (convertView == null) {
+                view = new RecipeIteamView(getApplicationContext());
+            } else {
+                view = (RecipeIteamView) convertView;
             }
 
-            public void addItem(RecipeItem item) {
-                items.add(item);
-            }
+            RecipeItem item = items.get(position);
 
-            @Override
-            public Object getItem(int position) {
-                return items.get(position);
-            }
+            view.setName(item.getName());
 
-            @Override
-            public long getItemId(int position) {
-                return position;
-            }
-
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                // 뷰 객체 재사용
-                RecipeIteamView view = null;
-                if (convertView == null) {
-                    view = new RecipeIteamView(getApplicationContext());
-                } else {
-                    view = (RecipeIteamView) convertView;
-                }
-
-                RecipeItem item = items.get(position);
-
-                view.setName(item.getName());
-
-
-
-                return view;
-            }
+            return view;
         }
     }
-
+}
 
 
