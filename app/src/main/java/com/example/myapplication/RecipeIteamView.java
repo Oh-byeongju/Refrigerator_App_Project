@@ -10,21 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 public class RecipeIteamView extends LinearLayout {
+
     TextView textView, textView2;
-
     ImageView imageView;
-
     // Generate > Constructor
 
     public RecipeIteamView(Context context) {
         super(context);
-
         init(context);
     }
 
     public RecipeIteamView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
         init(context);
     }
 
@@ -34,12 +31,10 @@ public class RecipeIteamView extends LinearLayout {
         inflater.inflate(R.layout.activity_recipe_item, this, true);
 
         textView = (TextView) findViewById(R.id.textView);
-
     }
 
     public void setName(String name) {
         textView.setText(name);
     }
-
 
 }

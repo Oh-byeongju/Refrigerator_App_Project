@@ -2,25 +2,16 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import java.sql.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Fragment1 extends Fragment{
@@ -41,13 +32,9 @@ public class Fragment1 extends Fragment{
 
         // Grid 설정
         bindGrid();
-
         return view;
     }
 
-    /**
-     * Grid 설정
-     */
     public void bindGrid() {
 
         Cal_dday cd = new Cal_dday();
@@ -118,12 +105,8 @@ public class Fragment1 extends Fragment{
                         Toast.makeText(getActivity(),"삭제가 완료되었습니다", Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 return true;
             }
         });
-
-
     }
-
 }

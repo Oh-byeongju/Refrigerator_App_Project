@@ -49,8 +49,6 @@ public class PhGridArrayAdapter extends ArrayAdapter<PhGridItem> {
         else{
             viewHolder.tvName2.setText("D-" + Integer.toString(countryItem.getDday()));
         }
-
-
         return a_convertView;
     }
 

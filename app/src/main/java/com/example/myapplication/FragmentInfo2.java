@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
@@ -30,7 +28,7 @@ public class FragmentInfo2 extends Fragment {
     TextView tvCount;
     String[] items = {"냉장", "냉동", "실온"};
     static String storage = "냉장";
-    static int count = 1;
+    static int count;
     static int num = 0;
 
     Date curDate = new Date(); // 현재
@@ -101,6 +99,7 @@ public class FragmentInfo2 extends Fragment {
          });
 
          //수량 설정
+         count = 1;
          tvCount = view.findViewById(R.id.count);
          tvCount.setText(count+"");
          btnPlus = view.findViewById(R.id.btn_plus);
@@ -226,5 +225,4 @@ public class FragmentInfo2 extends Fragment {
         else
             end_day.setText(selectedDateStr);
     }
-
 }

@@ -3,37 +3,24 @@ package com.example.myapplication;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Date;
-import java.util.Locale;
 
 public class camera extends AppCompatActivity {
 
@@ -47,7 +34,7 @@ public class camera extends AppCompatActivity {
     private Socket socket;
     private DataOutputStream dos;
     private DataInputStream dis;
-    private static final String ip = "112.162.2.95";
+    private static final String ip = "192.168.35.55";
     private static final int port = 58000;
 
     ProgressDialog customProgressDialog;
@@ -147,7 +134,7 @@ public class camera extends AppCompatActivity {
                 dos = new DataOutputStream(socket.getOutputStream());
 
                 if(barcode != null){
-                    str1 = "abc";
+                    str1 = "Product";
                     dos.writeUTF(str1+barcode);
                     dos.flush();
                     barcode = null;

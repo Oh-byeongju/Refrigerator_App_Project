@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class RecipeActivity2 extends AppCompatActivity {
@@ -38,7 +36,7 @@ public class RecipeActivity2 extends AppCompatActivity {
         };
         thread.start();
 
-        while(true){        // 이거 없으면 스레드가 더 늦게 돌아서 데이터가 안옴
+        while(true){
             if (mlist.size() == 30)
                 break;
         }

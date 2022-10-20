@@ -22,7 +22,7 @@
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
-            android:text="백조의 냉장고1"
+            android:text=""
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:textColor="#ffffff"
             android:textSize="20sp" />

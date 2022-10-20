@@ -1,46 +1,31 @@
 package com.example.myapplication;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
-
 import androidx.core.app.NotificationCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.myapplication.ui.main.SectionsPagerAdapter;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
     //여기부터
+
+    static String name = " ";
     FloatingActionButton fab_add, fab_edit, fab_camera, fab_recipe;
     Animation fabOpen, fabClose, fabRClockwise, fabRAntiClockwise;
     static String string;
@@ -60,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+        if (intent.getStringExtra("u_name") != null){
+            name = intent.getStringExtra("u_name");
+            name = name+"의 냉장고";
+        }
+
+        TextView text1 = (TextView)findViewById(R.id.title);
+        text1.setText(name);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
@@ -110,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
             String title = str + "의 유통기한이 얼마남지 않았어요!";
             sendOnChannel1(title);
         }
-
 
         /*FloatingActionButton fab = binding.fab;
 
@@ -238,7 +231,4 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
-
 }

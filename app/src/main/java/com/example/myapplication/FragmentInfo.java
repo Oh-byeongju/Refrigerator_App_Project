@@ -4,53 +4,19 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 public class FragmentInfo extends Fragment {
 
@@ -61,7 +27,7 @@ public class FragmentInfo extends Fragment {
 
     TextView tvCount;
     String[] items = {"냉장", "냉동", "실온"};
-    static int count = 1;
+    static int count;
     static String storage = "냉장";
     static int num = 0;
     static String p_name, p_date;
@@ -77,6 +43,7 @@ public class FragmentInfo extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Required empty public constructor
+
     }
 
 
@@ -103,11 +70,12 @@ public class FragmentInfo extends Fragment {
 
         //birthday.setText(result); // 오늘 날짜로 초기화
 
-        //수량 설정
-        tvCount = view.findViewById(R.id.count);
-        tvCount.setText(count+"");
-        btnPlus = view.findViewById(R.id.btn_plus);
-        btnMinus = view.findViewById(R.id.btn_minus);
+         //수량 설정
+         count = 1;
+         tvCount = view.findViewById(R.id.count);
+         tvCount.setText(count+"");
+         btnPlus = view.findViewById(R.id.btn_plus);
+         btnMinus = view.findViewById(R.id.btn_minus);
 
          btn_ref1.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -298,5 +266,4 @@ public class FragmentInfo extends Fragment {
         else
             end_day.setText(selectedDateStr);
     }
-
 }

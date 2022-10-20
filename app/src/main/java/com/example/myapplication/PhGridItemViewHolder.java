@@ -18,6 +18,4 @@ public class PhGridItemViewHolder {
         tvName2 = a_view.findViewById(R.id.tv_name2);
         delete = a_view.findViewById(R.id.btn_delete);
     }
-
-
 }

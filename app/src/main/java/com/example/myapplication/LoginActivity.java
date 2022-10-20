@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.zxing.common.StringUtils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -31,22 +29,12 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_signup;
     TextInputEditText ti_id, ti_pw;
 
-    static String text = "";
     static String id, pw, check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Intent intent = getIntent();
-        text = intent.getStringExtra("info");
-
-        // 이거의 용도를 모르겠음
-        if(!(text == null || text.isEmpty())){
-            ClientThread thread = new ClientThread();
-            thread.start();
-        }
 
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_signup = (Button) findViewById(R.id.btn_signup);
@@ -77,13 +65,14 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    // 로그인 성공할때 if문 여기서 check에 사용자 이름 들어가 있음
                     if(!check.equals("")){
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("u_name", check);
                         startActivity(intent);
                     }
                     else{
-                        Toast.makeText(LoginActivity.this, "다시 입력하세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "존재하지 않는 계정입니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -112,14 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 dis = new DataInputStream(socket.getInputStream());
                 dos = new DataOutputStream(socket.getOutputStream());
 
-                if(text != null){
-                    dos.writeUTF("ins" + text);
-                    dos.flush();
-                    text = null;
-                    Log.w("ClientThread", "서버로 보냄");
-
-                }
-                else if(id != null && pw != null){
+                if(id != null && pw != null){
                     dos.writeUTF("check" + id + "#" + pw);
                     dos.flush();
 

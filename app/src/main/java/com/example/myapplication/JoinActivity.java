@@ -24,8 +24,7 @@ public class JoinActivity extends AppCompatActivity {
     private DataInputStream dis;
     private static final String ip = "192.168.35.55";
     private static final int port = 58000;
-
-    static String id, check_id;
+    public static String check_id;
 
     Button btn_signup;
     TextInputEditText j_id, j_pw, j_name, j_tel;
@@ -55,27 +54,37 @@ public class JoinActivity extends AppCompatActivity {
                     Toast.makeText(JoinActivity.this, "모든 항목은 필수 입력사항입니다.", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    ClientThread thread = new ClientThread();
+                    String tmp = idStr + '#' + pwStr + '#' + nameStr + '#' + telStr;
+                    ClientThread thread = new ClientThread(tmp);
                     thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-                    if(check_id != null){
-                        Toast.makeText(JoinActivity.this, "중복된 아이디입니다.", Toast.LENGTH_SHORT).show();
+                    if(check_id.equals("중복")){
+                        Toast.makeText(JoinActivity.this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        // 데이터 전달
-                        String tmp = idStr + '#' + pwStr + '#' + nameStr + '#' + telStr;
                         Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(JoinActivity.this, LoginActivity.class);
                         intent.putExtra("info", tmp);
                         startActivity(intent);
                     }
                 }
-
             }
         });
     }
 
     class ClientThread extends Thread {
+
+        private String text;
+
+        public ClientThread(String text) {
+            this.text = text;
+        }
+
         @Override
         public void run() {
             try {
@@ -85,20 +94,17 @@ public class JoinActivity extends AppCompatActivity {
                 Log.d("success", "연결 완료");
 
                 String deli;
+                deli = "Insert";
 
                 dis = new DataInputStream(socket.getInputStream());
                 dos = new DataOutputStream(socket.getOutputStream());
 
-                if(id != null){
-                    deli = "checkId";
-                    dos.writeUTF(deli+id);
-                    dos.flush();
-                    id = null;
-                    Log.w("ClientThread", "서버로 보냄");
+                dos.writeUTF(deli+text);
+                dos.flush();
+                Log.w("ClientThread", "서버로 보냄");
 
-                    check_id = dis.readUTF();
-                    System.out.println("[데이터 받기 성공]: " + check_id);
-                }
+                check_id = dis.readUTF();
+                System.out.println("[데이터 받기 성공]: " + check_id);
 
                 dis.close();
                 dos.close();
@@ -107,7 +113,6 @@ public class JoinActivity extends AppCompatActivity {
             }catch (IOException e1){
                 Log.w("fail", "서버 접속 실패");
             }
-
         }
     }
 }

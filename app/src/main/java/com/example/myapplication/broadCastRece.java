@@ -11,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import androidx.core.app.NotificationCompat;
-
 public class broadCastRece extends BroadcastReceiver {
     public final static String MyAction = "com.example.myapplication.ACTION_MY_BROADCAST";
 

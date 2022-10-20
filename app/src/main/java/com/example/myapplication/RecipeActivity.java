@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,6 @@ public class RecipeActivity extends AppCompatActivity {
         tv_nr = (TextView) findViewById(R.id.tv_nr);
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        // 아이템 clear 안해주면 안에 값이 중첩돼서 파이썬으로 날라감
         item.clear();
 
         String ps;
@@ -105,9 +103,7 @@ public class RecipeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = editText.getText().toString();
 
-
                 adapter.notifyDataSetChanged();
-
 
                 Intent intent = new Intent(RecipeActivity.this, RecipeActivity2.class);
                 intent.putExtra("name",name);
@@ -133,7 +129,7 @@ public class RecipeActivity extends AppCompatActivity {
                     List<String> res_item = new ArrayList<>(temp_item);
 
                     StringBuilder sb = new StringBuilder();
-                    sb.append(3);
+                    sb.append("Recipe");
 
                     for (String val : res_item){
                         sb.append(val).append(" ");

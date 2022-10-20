@@ -16,13 +16,11 @@ public class RecipeItemView extends LinearLayout {
 
     public RecipeItemView(Context context) {
         super(context);
-
         init(context);
     }
 
     public RecipeItemView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
         init(context);
     }
 
@@ -42,7 +40,5 @@ public class RecipeItemView extends LinearLayout {
     public void setExplanation(String explanation) {
         textView2.setText(explanation);
     }
-
-
 
 }
