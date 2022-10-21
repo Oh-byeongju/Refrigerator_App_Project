@@ -35,7 +35,7 @@ public class camera extends AppCompatActivity {
     private DataOutputStream dos;
     private DataInputStream dis;
     private static final String ip = "192.168.35.55";
-    private static final int port = 58000;
+    private static final int port = 57000;
 
     ProgressDialog customProgressDialog;
 

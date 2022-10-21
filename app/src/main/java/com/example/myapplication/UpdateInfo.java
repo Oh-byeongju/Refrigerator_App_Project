@@ -20,9 +20,9 @@ import java.util.Date;
 
 public class UpdateInfo extends AppCompatActivity {
 
-    String p_name, p_date, s_name, s_st, s_date, s_id;
+    String p_name, p_date, s_name, s_st, s_date, s_id, s_memo;
     Integer s_cnt;
-    EditText name;
+    EditText name, memo;
     EditText end_day;
     EditText start_day;
     Button birthday, btnPlus, btnMinus, regist, btn_ref1, btn_ref2, btn_ref3;
@@ -47,6 +47,8 @@ public class UpdateInfo extends AppCompatActivity {
         start_day = (EditText) findViewById(R.id.start);
         start_day.setText(result);
 
+        memo = (EditText) findViewById(R.id.memo);
+
         birthday = (Button) findViewById(R.id.button);
         regist = (Button) findViewById(R.id.button3);
         btn_ref1 = (Button) findViewById(R.id.storage1);
@@ -70,21 +72,13 @@ public class UpdateInfo extends AppCompatActivity {
             s_st = res.getString(2);
             s_cnt = res.getInt(3);
             s_date = res.getString(4);
+            s_memo = res.getString(5);
         }
-
+        System.out.println(s_st);
         name.setText(s_name);
         tvCount.setText(s_cnt+"");
         end_day.setText(s_date);
-
-        if(s_st.equals("냉동")){
-            btn_ref2.performClick();
-        }
-        else if(s_st.equals("실온")){
-            btn_ref3.performClick();
-        }
-        else{
-            btn_ref1.performClick();
-        }
+        memo.setText(s_memo);
 
         btn_ref1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +118,16 @@ public class UpdateInfo extends AppCompatActivity {
                 storage = "실온";
             }
         });
+
+        if(s_st.equals("냉동")){
+            btn_ref2.performClick();
+        }
+        else if(s_st.equals("실온")){
+            btn_ref3.performClick();
+        }
+        else{
+            btn_ref1.performClick();
+        }
 
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +192,7 @@ public class UpdateInfo extends AppCompatActivity {
                     }
                     else {
                         DatabaseHelper db = new DatabaseHelper(UpdateInfo.this);
-                        db.updateData(name.getText().toString(), storage, s_cnt, end_day.getText().toString(), s_name, s_date);
+                        db.updateData(name.getText().toString(), storage, s_cnt, end_day.getText().toString(), memo.getText().toString(), s_name, s_date);
                         Toast.makeText(UpdateInfo.this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UpdateInfo.this, MainActivity.class);
                         startActivity(intent);

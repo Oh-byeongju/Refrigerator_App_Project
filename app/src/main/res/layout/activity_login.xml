@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:id="@+id/linear">
 
     <ImageView
         android:id="@+id/app_name"
@@ -14,7 +15,8 @@
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/ic_app_logo"
-        tools:srcCompat="@drawable/ic_app_logo" />
+        tools:srcCompat="@drawable/ic_app_logo"
+     />
 
     <ImageView
         android:id="@+id/imageView"
@@ -23,7 +25,8 @@
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/ic_app_icon"
-        tools:srcCompat="@drawable/ic_app_icon" />
+        tools:srcCompat="@drawable/ic_app_icon"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -36,6 +39,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_id"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>

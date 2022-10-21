@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,7 +40,7 @@ public class RecipeActivity extends AppCompatActivity {
     private DataOutputStream dos;
     private DataInputStream dis;
     private static final String ip = "192.168.35.55";
-    private static final int port = 58000;
+    private static final int port = 57000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,15 +72,17 @@ public class RecipeActivity extends AppCompatActivity {
         String[] strArr = tmp.split("#");
         ArrayList<String> f_name = new ArrayList<String>(Arrays.asList(strArr));
 
-        if(f_name.size() == 0)
-            tv_nr.setVisibility(View.VISIBLE);
-
         // 어댑터 안에 데이터 담기
         RecipeAdapter adapter = new RecipeAdapter();
 
-        for(int i=0;i<f_name.size();i++){
-            adapter.addItem(new RecipeItem(f_name.get(i)));
+        if(tmp.equals(""))
+            tv_nr.setVisibility(View.VISIBLE);
+        else{
+            for(int i=0;i<f_name.size();i++){
+                adapter.addItem(new RecipeItem(f_name.get(i)));
+            }
         }
+
 
         // 리스트 뷰에 어댑터 설정
         listView.setAdapter(adapter);
@@ -102,12 +105,16 @@ public class RecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = editText.getText().toString();
-
                 adapter.notifyDataSetChanged();
 
-                Intent intent = new Intent(RecipeActivity.this, RecipeActivity2.class);
-                intent.putExtra("name",name);
-                startActivity(intent);
+                if(name.trim().isEmpty()){
+                    Toast.makeText(RecipeActivity.this, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(RecipeActivity.this, RecipeActivity2.class);
+                    intent.putExtra("name",name);
+                    startActivity(intent);
+                }
             }
         });
     }

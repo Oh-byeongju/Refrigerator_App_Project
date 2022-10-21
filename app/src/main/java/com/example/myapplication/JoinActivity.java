@@ -23,7 +23,7 @@ public class JoinActivity extends AppCompatActivity {
     private DataOutputStream dos;
     private DataInputStream dis;
     private static final String ip = "192.168.35.55";
-    private static final int port = 58000;
+    private static final int port = 57000;
     public static String check_id;
 
     Button btn_signup;
@@ -64,7 +64,7 @@ public class JoinActivity extends AppCompatActivity {
                     }
 
                     if(check_id.equals("중복")){
-                        Toast.makeText(JoinActivity.this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JoinActivity.this, "이미 사용 중인 아이디입니다.", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         Toast.makeText(JoinActivity.this, "가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();

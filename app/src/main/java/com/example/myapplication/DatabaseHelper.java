@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private  Context context;
-    private static final String DATABASE_NAME = "ref.db";
+    private static final String DATABASE_NAME = "myref.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "ref01";
     private static final String COLUMN_ID = "_id";
@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ST = "p_st";
     private static final String COLUMN_CNT = "p_cnt";
     private static final String COLUMN_DATE = "p_date";
+    private static final String COLUMN_MEMO = "p_memo";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,7 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_NAME + " TEXT, "
                 + COLUMN_ST + " TEXT, "
                 + COLUMN_CNT + " INTEGER, "
-                + COLUMN_DATE + " TEXT); ";
+                + COLUMN_DATE + " TEXT, "
+                + COLUMN_MEMO + " TEXT); ";
 
         db.execSQL(sql);
     }
@@ -45,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addInfo(String p_name, String p_st, int p_cnt, String p_date){
+    public void addInfo(String p_name, String p_st, int p_cnt, String p_date, String p_memo){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -53,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ST, p_st);
         cv.put(COLUMN_CNT, p_cnt);
         cv.put(COLUMN_DATE, p_date);
+        cv.put(COLUMN_MEMO, p_memo);
         long result = db.insert(TABLE_NAME, null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -86,10 +89,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateData(String name, String st, Integer cnt, String date, String p_name, String p_date){
+    public void updateData(String name, String st, Integer cnt, String date, String memo, String p_name, String p_date){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + TABLE_NAME + " SET p_name = " + "\"" + name + "\"" + ", p_st = " + "\"" + st + "\"" + ", p_cnt = " + cnt + ", " +
-                "p_date = " + "\"" + date + "\"" + " WHERE p_name = " + "\"" + p_name + "\"" + " AND p_date = " + "\"" + p_date + "\"");
+                "p_date = " + "\"" + date + "\"" + ", p_memo = " + "\"" + memo + "\"" +" WHERE p_name = " + "\"" + p_name + "\"" + " AND p_date = " + "\"" + p_date + "\"");
         db.close();
     }
 }
