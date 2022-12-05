@@ -55,6 +55,14 @@ public class ProductIcon {
             p_id = R.raw.egg;
         else if(name.contains("아이스크림") || name.contains("메로나") || name.contains("쿠엔크") || name.contains("콘"))
             p_id = R.raw.icecream;
+        else if(name.contains("비타500"))
+            p_id = R.raw.bita500;
+        else if(name.contains("훈제란"))
+            p_id = R.raw.egg2;
+        else if(name.contains("요거트") || name.contains("요하임"))
+            p_id = R.raw.yogurt;
+        else if(name.contains("치즈"))
+            p_id = R.raw.cheese;
 
         else
             p_id = R.mipmap.ic_ref_logo_round;

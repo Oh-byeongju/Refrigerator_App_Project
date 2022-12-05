@@ -55,6 +55,8 @@ public class FragmentInfo2 extends Fragment {
 
         memo = view.findViewById(R.id.memo);
 
+        storage = "냉장";
+
         birthday = view.findViewById(R.id.button);
         regist = view.findViewById(R.id.button3);
         btn_ref1 = view.findViewById(R.id.storage1);

@@ -46,6 +46,10 @@ public class PhGridArrayAdapter extends ArrayAdapter<PhGridItem> {
             viewHolder.tvName2.setText("D+" + Integer.toString(Math.abs(countryItem.getDday())));
             viewHolder.tvName2.setTextColor(Color.parseColor("#4374D9"));
         }
+        else if(countryItem.getDday() < 3){
+            viewHolder.tvName2.setText("D-" + Integer.toString(countryItem.getDday()));
+            viewHolder.tvName2.setTextColor(Color.parseColor("#0000FF"));
+        }
         else{
             viewHolder.tvName2.setText("D-" + Integer.toString(countryItem.getDday()));
         }

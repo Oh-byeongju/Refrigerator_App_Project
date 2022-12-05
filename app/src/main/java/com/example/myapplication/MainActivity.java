@@ -52,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getStringExtra("u_name") != null){
             name = intent.getStringExtra("u_name");
-            name = name+"의 냉장고";
+            name = name+"님의 냉장고";
         }
+
 
         TextView text1 = (TextView)findViewById(R.id.title);
         text1.setText(name);

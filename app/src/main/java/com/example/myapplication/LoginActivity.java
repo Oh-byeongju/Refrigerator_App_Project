@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,10 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     private Socket socket;
     private DataOutputStream dos;
     private DataInputStream dis;
-    private static final String ip = "192.168.35.55";
+    private static final String ip = "172.30.94.153";
     private static final int port = 57000;
 
-    LinearLayout linear;
     Button btn_login;
     Button btn_signup;
     TextInputEditText ti_id, ti_pw;
@@ -38,9 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        linear = (LinearLayout) findViewById(R.id.linear);
-        linear.setFocusable(true);
-        linear.setFocusableInTouchMode(true);
 
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_signup = (Button) findViewById(R.id.btn_signup);
@@ -76,10 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("u_name", check);
                         startActivity(intent);
+
                         ti_id.setText(null);
                         ti_pw.setText(null);
-                        ti_id.clearFocus();
-                        ti_pw.clearFocus();
                     }
                     else{
                         Toast.makeText(LoginActivity.this, "등록되지 않은 아이디이거나 잘못 입력하였습니다.", Toast.LENGTH_LONG).show();
@@ -92,10 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ti_id.setText(null);
-                ti_pw.setText(null);
-                ti_id.clearFocus();
-                ti_pw.clearFocus();
                 Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
                 startActivity(intent);
             }
