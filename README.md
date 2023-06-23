@@ -68,13 +68,13 @@
 ### 📌 제품 등록, 수정, 삭제 기능
 <img width="100%" alt="gif" src="https://user-images.githubusercontent.com/96694919/248254877-13e6cf85-add1-4067-a59c-cd86692fc1f3.gif"/>
 
-<br/>
+
 ### 📌 레시피 검색, 추천 및 유통기한 알림 기능
 <img width="100%" alt="gif" src="https://user-images.githubusercontent.com/96694919/248254899-43147044-d476-41eb-a3ee-67d14108c9f7.gif"/>
 
 ## 👩‍💻 개선사항
 
-### * 해당 프로젝트의 개선사항 및 보완할 점입니다.
+### 해당 프로젝트의 개선사항 및 보완할 점입니다.
 
 - 데이터 통신을 할때 소켓을 이용한 통신이 아닌 HTTP 통신을 이용하여 실제 배포와 같은 환경을 구성(통신 환경 보완)
 - Django와 같은 Python 프레임워크를 사용하여 서버 코드 리팩토링
