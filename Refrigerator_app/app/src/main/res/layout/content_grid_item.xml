@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="42dp"
+            android:layout_height="17dp"
+            android:layout_marginRight="30dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="5dp">
+
+            <TextView
+                android:id="@+id/tv_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:text="D-354" />
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:padding="0dp"
+            android:text="X"
+            android:textSize="10dp"
+            android:backgroundTint="#FF0000"
+            android:enabled="false"
+            android:visibility="invisible"
+            >
+
+        </Button>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="40.00dp"
+        android:layout_height="40.00dp"
+        android:layout_gravity="center" />
+
+    <!-- Name -->
+    <TextView
+        android:paddingTop="3dp"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/rose"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:text="emoji_u1f600" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="5dp">
+
+    </LinearLayout>
+
+</LinearLayout>

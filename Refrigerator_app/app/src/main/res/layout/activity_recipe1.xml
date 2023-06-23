@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/app_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#000000"
+        android:backgroundTint="#429EFF"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:textColor="#ffffff"
+        android:textSize="20sp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="레시피 검색"
+            android:layout_gravity="left"
+            android:id="@+id/toolbar_title"
+            android:textSize="20sp"
+            android:textColor="#ffffffff"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+            android:layout_weight="10"
+            android:layout_marginStart="10dp"
+            android:drawableLeft="@drawable/ic_search_"
+            android:hint="  원하는 레시피를 입력해주세요"
+            android:background="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:text="검색" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@drawable/border_round2"
+            android:text="냉장고 재료로 만들 수 있는 "
+            android:fontFamily="@font/rose"
+
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="   레시피 추천"
+            android:paddingEnd="30dp"
+            android:fontFamily="@font/rose"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_marginBottom="40dp"
+                android:id="@+id/listView"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_round"
+                android:foregroundGravity="center" />
+
+            <TextView
+                android:id="@+id/tv_nr"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="50dp"
+                android:visibility="invisible"
+                android:text="추천 레시피가 없습니다"
+                android:fontFamily="@font/rose"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

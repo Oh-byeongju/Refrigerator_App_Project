@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+    android:layout_marginTop="10sp"
+    android:paddingTop="3sp"
+    android:paddingBottom="3sp"
+    android:background="#F4F2F2"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/rose"
+            android:text=" "
+            android:lines="1"
+            android:ellipsize="end"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/contentText"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="4"
+        android:layout_marginLeft="10sp"
+        android:gravity="center_vertical"
+        android:lines="5"
+        android:ellipsize="end"
+        android:text=""
+        android:fontFamily="@font/rose"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/linkText"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:layout_marginLeft="10sp"
+        android:gravity="center_vertical"
+        android:lines="4"
+        android:ellipsize="end"
+        android:text=""
+        android:textColor="#0054FF"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
