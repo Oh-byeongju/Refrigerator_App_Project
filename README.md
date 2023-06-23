@@ -69,7 +69,6 @@
 <img width="100%" alt="gif" src="https://user-images.githubusercontent.com/96694919/248254877-13e6cf85-add1-4067-a59c-cd86692fc1f3.gif"/>
 
 <br/>
-
 ### 📌 레시피 검색, 추천 및 유통기한 알림 기능
 <img width="100%" alt="gif" src="https://user-images.githubusercontent.com/96694919/248254899-43147044-d476-41eb-a3ee-67d14108c9f7.gif"/>
 
